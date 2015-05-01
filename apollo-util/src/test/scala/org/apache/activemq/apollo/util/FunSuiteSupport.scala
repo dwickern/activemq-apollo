@@ -170,14 +170,9 @@ abstract class FunSuiteSupport extends FunSuite with Logging with ParallelBefore
 
   def testName = _testName.get
 
-  protected override def runTest(testName: String, reporter: org.scalatest.Reporter, stopper: Stopper, configMap: Map[String, Any], tracker: Tracker) = {
+  protected override def runTest(testName: String, args: Args): Status = {
     _testName.set(testName)
-    try {
-      super.runTest(testName, reporter, stopper, configMap, tracker)
-    } finally {
-      _testName.remove
-
-    }
+    try super.runTest(testName, args) finally _testName.remove
   }
 
   private class ShortCircuitFailure(msg:String) extends RuntimeException(msg)

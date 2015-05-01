@@ -24,7 +24,7 @@ import org.fusesource.hawtdispatch._
 import org.apache.activemq.apollo.dto.{DestMetricsDTO, AggregateDestMetricsDTO, QueueStatusDTO, TopicStatusDTO}
 import collection.immutable.HashMap
 import java.io.File
-import org.scalatest.{Tag, FunSuite, ParallelTestExecution, OneInstancePerTest}
+import org.scalatest.{Suite, Tag, FunSuite, ParallelTestExecution, OneInstancePerTest}
 import java.util
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.fusesource.hawtbuf.{ByteArrayOutputStream, Buffer}
@@ -121,7 +121,7 @@ trait BrokerParallelTestExecution extends FunSuite with ParallelTestExecution {
   var test_rw_lock = new ReentrantReadWriteLock();
 
   override def newInstance = {
-    val rc = super.newInstance.asInstanceOf[BrokerFunSuiteSupport]
+    val rc = super.newInstance.asInstanceOf[BrokerFunSuiteSupport with Suite with ParallelTestExecution]
     rc.before_and_after_all_object = self
     rc.broker = self.broker
     rc.port = self.port
@@ -157,7 +157,7 @@ trait BrokerParallelTestExecution extends FunSuite with ParallelTestExecution {
  *
  * @author <a href="http://hiramchirino.com">Hiram Chirino</a>
  */
-class BrokerFunSuiteSupport extends FunSuiteSupport with Logging { // with ShouldMatchers with BeforeAndAfterEach with Logging {
+abstract class BrokerFunSuiteSupport extends FunSuiteSupport with Logging { // with ShouldMatchers with BeforeAndAfterEach with Logging {
   var before_and_after_all_object:BrokerFunSuiteSupport = _
   var broker: Broker = null
   var port = 0

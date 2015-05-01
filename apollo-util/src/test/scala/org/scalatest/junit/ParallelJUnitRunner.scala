@@ -56,7 +56,6 @@ import scala.Some
  * @author Jon-Anders Teigen
  * @author Colin Howe
  */
-@RunWith(classOf[JUnitRunner])
 final class ParallelJUnitRunner(suiteClass: java.lang.Class[Suite]) extends org.junit.runner.Runner {
 
   private val canInstantiate = Suite.checkForPublicNoArgConstructor(suiteClass)
@@ -96,13 +95,10 @@ final class ParallelJUnitRunner(suiteClass: java.lang.Class[Suite]) extends org.
    */
   def run(notifier: RunNotifier) {
     val reporter = new org.scalatest.junit.RunNotifierReporter(notifier)
-    var stopper = new Stopper {}
-    var filter = Filter()
-    var configMap = Map[String, Any]()
     ParallelJUnitRunner.withExecutor { executor =>
-      val distributor = new ConcurrentDistributor(reporter, stopper, filter, configMap, executor)
+      val distributor = new ConcurrentDistributor(Args(reporter), executor)
       try {
-        suiteToRun.run(None, reporter, stopper, filter, configMap, Some(distributor), new Tracker)
+        suiteToRun.run(None, Args(reporter, distributor = Some(distributor), tracker = new Tracker))
       } finally {
         distributor.waitUntilDone()
       }

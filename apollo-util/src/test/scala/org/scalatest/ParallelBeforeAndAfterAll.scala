@@ -115,7 +115,7 @@ import tools.ConcurrentDistributor
  *
  * @author Bill Venners
  */
-trait ParallelBeforeAndAfterAll extends AbstractSuite {
+trait ParallelBeforeAndAfterAll extends SuiteMixin {
 
   this: Suite =>
 
@@ -206,14 +206,13 @@ trait ParallelBeforeAndAfterAll extends AbstractSuite {
    * exception, this method will complete abruptly with the same exception.
    * </p>
    */
-  abstract override def run(testName: Option[String], reporter: Reporter, stopper: Stopper, filter: Filter,
-                            configMap: Map[String, Any], distributor: Option[Distributor], tracker: Tracker) {
+  abstract override def run(testName: Option[String], args: Args): Status = {
     var thrownException: Option[Throwable] = None
 
     def waitUntilDistributorIsDone = {
       // If you are using a concurrent distributor.. wait for all
       // concurrent tasks to complete before executing the afterAll.
-      distributor match {
+      args.distributor match {
         case Some(distributor) => distributor match {
           case distributor: ConcurrentDistributor =>
             distributor.waitUntilDone();
@@ -223,18 +222,20 @@ trait ParallelBeforeAndAfterAll extends AbstractSuite {
       }
     }
 
-    beforeAll(configMap)
+    beforeAll(args.configMap)
     waitUntilDistributorIsDone
     try {
-      super.run(testName, reporter, stopper, filter, configMap, distributor, tracker)
+      super.run(testName, args)
     }
     catch {
-      case e: Exception => thrownException = Some(e)
+      case e: Exception =>
+        thrownException = Some(e)
+        org.scalatest.FailedStatus
     }
     finally {
       waitUntilDistributorIsDone
       try {
-        afterAll(configMap) // Make sure that afterAll is called even if run completes abruptly.
+        afterAll(args.configMap) // Make sure that afterAll is called even if run completes abruptly.
         thrownException match {
           case Some(e) => throw e
           case None =>
