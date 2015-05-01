@@ -126,7 +126,7 @@
       
     <!-- maven plugin versions -->
 
-    <scala-plugin-version>3.1.0</scala-plugin-version>
+    <scala-plugin-version>3.2.0</scala-plugin-version>
     <maven-surefire-plugin-version>2.12</maven-surefire-plugin-version>
     <jetty-plugin-version>7.0.1.v20091125</jetty-plugin-version>
     <maven-release-plugin-version>2.4.1</maven-release-plugin-version>
