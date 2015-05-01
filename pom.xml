@@ -40,7 +40,8 @@
     <projectName>Apache Apollo</projectName>
 
     <!-- dependencies that track scala version changes -->
-    <scala-version>2.11.0</scala-version>
+    <scala-version>2.11.1</scala-version>
+    <scala-continuations-version>1.0.2</scala-continuations-version>
     <scala-postfix>2.11</scala-postfix>
     <scalatest-version>2.1.3</scalatest-version>
     
@@ -202,6 +203,38 @@
 
   <dependencyManagement>
     <dependencies>
+
+        <!-- =============================== -->
+        <!-- Force consistent scala versions -->
+        <!-- =============================== -->
+
+        <!-- for scalate -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <version>${scala-version}</version>
+        </dependency>
+
+        <!-- for swagger -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scalap</artifactId>
+            <version>${scala-version}</version>
+        </dependency>
+
+        <!-- for scalatest -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala-version}</version>
+        </dependency>
+
+        <!-- for scalatest -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
+            <version>${scala-version}</version>
+        </dependency>
 
       <!-- =============================== -->
       <!-- Setup default exclusions -->
