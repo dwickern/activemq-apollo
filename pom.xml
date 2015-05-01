@@ -41,6 +41,7 @@
 
     <!-- dependencies that track scala version changes -->
     <scala-version>2.10.0</scala-version>
+    <scala-postfix>2.10</scala-postfix>
     <scalatest-version>1.8</scalatest-version>
     
     <activemq-version>5.7.0</activemq-version>
@@ -109,7 +110,7 @@
 
     <jasypt-version>1.6</jasypt-version>
 
-    <scalate-version>1.6.1</scalate-version>
+    <scalate-version>1.7.1</scalate-version>
     <scalamd-version>1.6</scalamd-version>
 
     <servlet-api-version>3.0.0.v201112011016</servlet-api-version>

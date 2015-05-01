@@ -66,8 +66,8 @@
         <include>com.sun.jersey:jersey-server</include>
         <include>com.sun.jersey:jersey-core</include>
         <include>asm:asm</include>
-        <include>org.fusesource.scalate:scalate-core_2.10</include>
-        <include>org.fusesource.scalate:scalate-util_2.10</include>
+        <include>org.scalatra.scalate:scalate-core_${scala-postfix}</include>
+        <include>org.scalatra.scalate:scalate-util_${scala-postfix}</include>
         <include>net.sf.josql:josql</include>
         <include>net.sf.josql:gentlyweb-utils</include>
 

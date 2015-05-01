@@ -204,8 +204,8 @@
       </plugin>
 
       <plugin>
-        <groupId>org.fusesource.scalate</groupId>
-        <artifactId>maven-scalate-plugin_2.10</artifactId>
+        <groupId>org.scalatra.scalate</groupId>
+        <artifactId>maven-scalate-plugin_${scala-postfix}</artifactId>
         <version>${scalate-version}</version>
         <executions>
           <execution>
