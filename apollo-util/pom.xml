@@ -116,6 +116,13 @@
       <version>${scala-continuations-version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.scala-lang.modules</groupId>
+      <artifactId>scala-xml_${scala-postfix}</artifactId>
+      <scope>compile</scope>
+      <version>${scala-xml-version}</version>
+    </dependency>
+
     <!-- Testing Dependencies -->    
     <dependency>
       <groupId>org.scalatest</groupId>
