@@ -825,7 +825,26 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-    
+
+      <profile>
+          <id>s4i-release</id>
+          <properties>
+              <maven.test.skip.exec>true</maven.test.skip.exec>
+              <gpg.skip>true</gpg.skip>
+          </properties>
+          <distributionManagement>
+              <repository>
+                  <id>s4i</id>
+                  <name>s4i-nexus-releases</name>
+                  <url>http://git.intra.s4isystems.com:8081/nexus/content/repositories/releases</url>
+              </repository>
+              <snapshotRepository>
+                  <id>s4i</id>
+                  <name>s4i-nexus-snapshots</name>
+                  <url>http://git.intra.s4isystems.com:8081/nexus/content/repositories/snapshots</url>
+              </snapshotRepository>
+          </distributionManagement>
+      </profile>
   </profiles>
     
   <repositories>
